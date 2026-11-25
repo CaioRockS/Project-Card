@@ -1,0 +1,62 @@
+<main class = "auth-page">
+  <section class="auth-panel">
+    <div class="brand">
+      <i class="fa-solid fa-wallet"></i>
+      <span>Planeja</span>
+    </div>
+
+    <div class="mode-switch">
+      <button type="button"
+          [class.active]="modo === 'login'"
+          (click)="alteraraModo('login')">
+        Login
+      </button>
+
+      <button type="button"
+          [class.active]="modo === 'cadastro'"
+          (click)="alteraraModo('cadastro')">
+        Cadastro
+      </button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="auth-form">
+      @if(modo === 'cadastro'){
+        <div class="form-group">
+          <label for="nome">Nome do Usuário: *</label>
+          <input type="text" id="nome" name="nome" formControlName="nome" />
+
+          @if(form.controls.nome.hasError('required') && form.controls.nome.touched){
+            <span class="form-hint form-hint-error">Informe o nome do usuário.</span>
+          }
+        </div>
+      }
+
+      <div class="form-group">
+        <label for="nome">Login: *</label>
+        <input type="text" id="login" name="login" formControlName="login" />
+
+        @if(form.controls.nome.hasError('required') && form.controls.nome.touched){
+          <span class="form-hint form-hint-error">Informe o login.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="nome">Senha: *</label>
+        <input type="password" id="senha" name="senha" formControlName="senha" />
+
+        @if(form.controls.nome.hasError('required') && form.controls.nome.touched){
+          <span class="form-hint form-hint-error">Informe a senha.</span>
+        }
+
+        @if(form.controls.nome.hasError('minLength') && form.controls.nome.touched){
+          <span class="form-hint form-hint-error">A senha teve ter pelo menos 6 caracteres.</span>
+        }
+      </div>
+
+      <button type="submit" class="btn-primary auth-submit">
+        {{ modo === 'login' ? 'Entra' : 'Cadastrar' }}
+      </button>
+
+    </form>
+  </section>
+</main>
